@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EasyTodo</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+    integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
 </head>
 
 <body>
@@ -17,11 +19,21 @@
   <main>
     <h2>TODOs</h2>
     <div id="form">
-      <input type="text" name="name" placeholder="Name">
-      <input type="textarea" name="description" placeholder="Description">
+      <input type="text" name="name" id="name" placeholder="Name">
+      <input type="date" name="date" id="date">
+      <input type="textarea" name="description" id="description" placeholder="Description">
+      <select name="priority" id="priority">
+        <option value="default" disabled="true" selected>Priority</option>
+        <option value="low" id="low">Low</option>
+        <option value="medium" id="medium">Medium</option>
+        <option value="high" id="high">High</option>
+      </select>
+      <button type="submit"><i class="fas fa-plus-circle"></i></button>
     </div>
     <div id="list">
+      <div class="todo">
 
+      </div>
     </div>
   </main>
   <script src="main.js"></script>
