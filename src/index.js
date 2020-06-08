@@ -19,6 +19,17 @@ const getInput = () => {
   return [name, date, description, priority]
 };
 
+// TODOS
+const saveTodo = () => {
+    let todo = todoFactory(...getInput())
+    console.log(todo)
+    let serialized = JSON.stringify(todoFactory(...getInput()))
+    localStorage.setItem('project_' + todo.name, serialized)
+    console.log(JSON.parse(localStorage.getItem(todo.name)))
+  }
+
+// let selectedProject = document.querySelector('.selected_project');
+// PROJECTS
 const savedProjects = []
 
 for (let i = 0; i < localStorage.length; i++) {
@@ -26,26 +37,12 @@ for (let i = 0; i < localStorage.length; i++) {
     savedProjects.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
   }
 }
-console.log(savedProjects[0])
-
-let selectedProject = document.querySelector('.selected_project');
-
-const saveTodo = () => {
-  let todo = todoFactory(...getInput())
-  console.log(todo)
-  let serialized = JSON.stringify(todoFactory(...getInput()))
-
-  localStorage.setItem('project_' + todo.name, serialized)
-
-  console.log(JSON.parse(localStorage.getItem(todo.name)))
-}
 
 const saveProject = () => {
     let project = Project.projectFactory(getProjectInput())
     console.log(project)
     let serialized = JSON.stringify(project)
     localStorage.setItem('project_' + project.name, serialized)
-    // console.log(JSON.parse(localStorage.getItem(project.name)))
   }
 
   const getProjectInput = () => {
