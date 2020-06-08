@@ -10,6 +10,17 @@ const test = todoFactory(
     display.priorityField
 )
 
+const getInput = () =>{
+   const name = display.nameField.value
+   const date = display.dateField.value
+   const description = display.descriptionField.value
+   const priority = display.priorityField.value
+   return {name,date,description,priority}
+}
+
+const formSubmit = document.querySelector(".form-submit")
+formSubmit.addEventListener("click",getInput,false)
+
 Project.defaultProject.projects.push(test);
 
 console.log(Project.defaultProject);
