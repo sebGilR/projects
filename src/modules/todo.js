@@ -8,5 +8,4 @@ const todoFactory = (name, date, description, priority) => {
   return { name, date, description, priorityVal }
 }
 
-
 export default todoFactory

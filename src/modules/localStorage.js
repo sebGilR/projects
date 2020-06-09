@@ -5,9 +5,14 @@ const Storage = (() => {
 
   const getItem = (itemName) => JSON.parse(localStorage.getItem(itemName));
 
+  const serialized = (project) => {
+    return JSON.stringify(project)
+  }
+
   return {
     saveItem,
-    getItem
+    getItem,
+    serialized
   }
 })();
 

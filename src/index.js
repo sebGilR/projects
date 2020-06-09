@@ -4,12 +4,8 @@ import todoFactory from './modules/todo';
 import * as  Project from './modules/project';
 import Storage from './modules/localStorage'
 
-if (localStorage.getItem('default') === undefined) {
+if (localStorage.getItem('default') === null) {
   Project.setDefault()
-}
-
-const serialized = (project) => {
-  return JSON.stringify(project)
 }
 
 // TODOS
@@ -17,14 +13,13 @@ const saveTodo = () => {
   let todo = todoFactory(...display.getInput())
   let project = display.currentProject();
   Project.addTodo(project, todo);
-  Storage.saveItem(display.getCurrent().id, serialized(project));
+  Storage.saveItem(display.getCurrent().id, Storage.serialized(project));
   showTodos();
 }
 
 const selectProject = (e) => {
   let project = e.target;
-  display.removeSelected();
-  display.addSelected(project);
+  display.swapSelected(project);
   showTodos();
 }
 
@@ -32,20 +27,16 @@ const showProjects = () => {
   display.clearProjects();
   for (let i = 0; i < localStorage.length; i++) {
     if (localStorage.key(i) != "undefined") {
-      let current = Storage.getItem(localStorage.key(i))
-      let item = document.createElement('LI');
-      item.innerText = current.name;
-      item.setAttribute('id', localStorage.key(i));
-      item.addEventListener('click', selectProject);
-      localStorage.key(i) === 'default' ? item.classList.add('selected') : false;
-      display.projectsContianer.appendChild(item);
+      const current = Storage.getItem(localStorage.key(i))
+      const item = document.createElement('LI');
+      const key = localStorage.key(i)
+      display.buildProjects(current, item, key, selectProject);
     }
   }
 }
 
 const showTodos = () => {
   let project = JSON.parse(localStorage.getItem(display.getCurrent().id));
-  console.log(project)
   display.clearTodos();
   let item;
   for (let i = 0; i < project.todos.length; i++) {
@@ -56,25 +47,13 @@ const showTodos = () => {
 }
 
 const saveProject = () => {
-  let project = Project.projectFactory(getProjectInput());
-  console.log(project);
-  let serialized = JSON.stringify(project);
-  localStorage.setItem('project_' + (localStorage.length + 1), serialized);
+  let project = Project.projectFactory(display.projectInput());
+  Storage.saveItem('project_' + (localStorage.length + 1), Storage.serialized(project));
   showProjects();
 }
 
-const getProjectInput = () => {
-  const name = display.projectName.value
-  return name;
-};
-
-const formProjectSubmit = document.querySelector(".form-submit-project");
-formProjectSubmit.addEventListener("click", saveProject, false);
-
-const formSubmit = document.querySelector(".form-submit");
-formSubmit.addEventListener("click", saveTodo, false);
-
 const loader = () => {
+  display.setListeners(saveProject, saveTodo);
   showProjects();
   showTodos();
 }
