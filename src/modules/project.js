@@ -8,4 +8,12 @@ const setDefault = () => {
   localStorage.setItem('default', JSON.stringify(projectFactory('Default')));
 }
 
-export { projectFactory, setDefault }
+const addTodo = (project, todo) => {
+  project.todos.push(todo);
+}
+
+export {
+  projectFactory,
+  setDefault,
+  addTodo
+}

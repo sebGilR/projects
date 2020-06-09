@@ -2,37 +2,29 @@ import './style.scss';
 import display from './modules/displayController';
 import todoFactory from './modules/todo';
 import * as  Project from './modules/project';
+import Storage from './modules/localStorage'
 
 if (localStorage.getItem('default') === undefined) {
   Project.setDefault()
 }
 
+const serialized = (project) => {
+  return JSON.stringify(project)
+}
+
 // TODOS
 const saveTodo = () => {
   let todo = todoFactory(...display.getInput())
-  let project = JSON.parse(localStorage.getItem(display.getCurrent().id));
-  console.log(project)
-  project.todos.push(todo)
-  let serialized = JSON.stringify(project);
-  localStorage.setItem(display.getCurrent().id, serialized);
+  let project = display.currentProject();
+  Project.addTodo(project, todo);
+  Storage.saveItem(display.getCurrent().id, serialized(project));
   showTodos();
 }
 
-// PROJECTS
-// const clearProjects = () => {
-//   display.projectsContianer.innerHTML = "";
-// }
-
-// const clearTodos = () => {
-//   display.listContainer.innerHTML = "";
-// }
-
 const selectProject = (e) => {
   let project = e.target;
-
-  display.projectsContianer.childNodes.forEach(item => item.classList.remove('selected'));
-  project.classList.add('selected');
-  console.log(display.projectsContianer.childNodes);
+  display.removeSelected();
+  display.addSelected(project);
   showTodos();
 }
 
@@ -40,7 +32,7 @@ const showProjects = () => {
   display.clearProjects();
   for (let i = 0; i < localStorage.length; i++) {
     if (localStorage.key(i) != "undefined") {
-      let current = JSON.parse(localStorage.getItem(localStorage.key(i)));
+      let current = Storage.getItem(localStorage.key(i))
       let item = document.createElement('LI');
       item.innerText = current.name;
       item.setAttribute('id', localStorage.key(i));

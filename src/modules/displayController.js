@@ -26,13 +26,20 @@ const display = (() => {
   const projectName = document.querySelector("#project-name");
   const projectsContianer = document.getElementById('projects');
 
-  const getCurrent = () => { return document.querySelector('.selected') }
-  const currentProject = () => { JSON.parse(localStorage.getItem(display.getCurrent().id)) }
+  const getCurrent = () => document.querySelector('.selected');
+  const currentProject = () => JSON.parse(localStorage.getItem(display.getCurrent().id));
 
   const clearProjects = () => {
     projectsContianer.innerHTML = "";
   }
 
+  const removeSelected = () => {
+    display.projectsContianer.childNodes.forEach(item => item.classList.remove('selected'));
+  }
+
+  const addSelected = (project) => {
+    project.classList.add('selected');
+  }
 
   return {
     projectsContianer,
@@ -46,7 +53,9 @@ const display = (() => {
     getCurrent,
     currentProject,
     clearProjects,
-    clearTodos
+    clearTodos,
+    removeSelected,
+    addSelected
   }
 
 })()
