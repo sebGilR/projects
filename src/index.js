@@ -30,26 +30,42 @@ const saveTodo = () => {
 
 // let selectedProject = document.querySelector('.selected_project');
 // PROJECTS
-const savedProjects = []
+const clearProjects = () => {
+  display.projectsContianer.innerHTML = "";
+}
 
-for (let i = 0; i < localStorage.length; i++) {
-  if (localStorage.key(i) != "undefined") {
-    savedProjects.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
+const selectProject = (e) => {
+  let projectId = e.target.id
+  console.log(localStorage.getItem(projectId))
+
+}
+
+const showProjects = () => {
+  clearProjects();
+  for (let i = 0; i < localStorage.length; i++) {
+    if (localStorage.key(i) != "undefined") {
+      let current = JSON.parse(localStorage.getItem(localStorage.key(i)));
+      let item = document.createElement('LI');
+      item.innerText = current.name;
+      item.setAttribute('id', localStorage.key(i));
+      item.addEventListener('click', selectProject);
+      display.projectsContianer.appendChild(item);
+    }
   }
 }
 
 const saveProject = () => {
-  let project = Project.projectFactory(getProjectInput())
-  console.log(project)
-  let serialized = JSON.stringify(project)
-  localStorage.setItem('project_' + (localStorage.length + 1), serialized)
+  let project = Project.projectFactory(getProjectInput());
+  console.log(project);
+  let serialized = JSON.stringify(project);
+  localStorage.setItem('project_' + (localStorage.length + 1), serialized);
+  showProjects();
 }
 
 const getProjectInput = () => {
   const name = display.projectName.value
   return name;
 };
-
 
 const formProjectSubmit = document.querySelector(".form-submit-project")
 formProjectSubmit.addEventListener("click", saveProject, false)
@@ -58,3 +74,5 @@ const formSubmit = document.querySelector(".form-submit")
 formSubmit.addEventListener("click", saveTodo, false)
 
 Project.defaultProject.todos.push(test);
+
+window.addEventListener('onload', showProjects())
