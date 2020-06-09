@@ -1,16 +1,11 @@
-// const projectMethods = () => {
-//   const addTodo = (todo) => {
-//     this.projects.push(todo)
-//   }
-
-//   return { addTodo }
-// }
 
 const projectFactory = (name) => {
   const todos = [];
   return { name, todos }
 }
 
-const defaultProject = projectFactory('Default');
+const setDefault = () => {
+  localStorage.setItem('default', JSON.stringify(projectFactory('Default')));
+}
 
-export { projectFactory, defaultProject }
+export { projectFactory, setDefault }

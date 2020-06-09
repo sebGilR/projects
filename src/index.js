@@ -3,13 +3,7 @@ import display from './modules/displayController';
 import todoFactory from './modules/todo';
 import * as  Project from './modules/project';
 
-const test = todoFactory(
-  display.nameField,
-  display.dateField,
-  display.descriptionField,
-  display.priorityField
-)
-
+Project.setDefault()
 
 const getInput = () => {
   const name = display.nameField.value
@@ -28,7 +22,6 @@ const saveTodo = () => {
   console.log(JSON.parse(localStorage.getItem(todo.name)))
 }
 
-// let selectedProject = document.querySelector('.selected_project');
 // PROJECTS
 const clearProjects = () => {
   display.projectsContianer.innerHTML = "";
@@ -62,6 +55,8 @@ const saveProject = () => {
   showProjects();
 }
 
+
+
 const getProjectInput = () => {
   const name = display.projectName.value
   return name;
@@ -73,6 +68,4 @@ formProjectSubmit.addEventListener("click", saveProject, false)
 const formSubmit = document.querySelector(".form-submit")
 formSubmit.addEventListener("click", saveTodo, false)
 
-Project.defaultProject.todos.push(test);
-
-window.addEventListener('onload', showProjects())
+showProjects()
