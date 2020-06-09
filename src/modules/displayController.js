@@ -8,11 +8,47 @@ const display = (() => {
   const descriptionField = document.getElementById('description');
   const priorityField = document.getElementById('priority');
 
+  const getInput = () => {
+    const name = nameField.value
+    const date = dateField.value
+    const description = descriptionField.value
+    const priority = priorityField.value
+    return [name, date, description, priority]
+  };
+
+
+
+  const clearTodos = () => {
+    listContainer.innerHTML = "";
+  }
+
   // Project 
   const projectName = document.querySelector("#project-name");
   const projectsContianer = document.getElementById('projects');
 
-  return { projectsContianer, listContainer, nameField, dateField, descriptionField, priorityField, projectName }
+  const getCurrent = () => { return document.querySelector('.selected') }
+  const currentProject = () => { JSON.parse(localStorage.getItem(display.getCurrent().id)) }
+
+  const clearProjects = () => {
+    projectsContianer.innerHTML = "";
+  }
+
+
+  return {
+    projectsContianer,
+    listContainer,
+    nameField,
+    dateField,
+    descriptionField,
+    priorityField,
+    projectName,
+    getInput,
+    getCurrent,
+    currentProject,
+    clearProjects,
+    clearTodos
+  }
+
 })()
 
 export default display
