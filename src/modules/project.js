@@ -7,8 +7,8 @@
 // }
 
 const projectFactory = (name) => {
-  const projects = [];
-  return { name, projects }
+  const todos = [];
+  return { name, todos }
 }
 
 const defaultProject = projectFactory('Default');

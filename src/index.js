@@ -21,12 +21,12 @@ const getInput = () => {
 
 // TODOS
 const saveTodo = () => {
-    let todo = todoFactory(...getInput())
-    console.log(todo)
-    let serialized = JSON.stringify(todoFactory(...getInput()))
-    localStorage.setItem('project_' + todo.name, serialized)
-    console.log(JSON.parse(localStorage.getItem(todo.name)))
-  }
+  let todo = todoFactory(...getInput())
+  console.log(todo)
+  let serialized = JSON.stringify(todoFactory(...getInput()))
+  localStorage.setItem('project_' + todo.name, serialized)
+  console.log(JSON.parse(localStorage.getItem(todo.name)))
+}
 
 // let selectedProject = document.querySelector('.selected_project');
 // PROJECTS
@@ -39,16 +39,16 @@ for (let i = 0; i < localStorage.length; i++) {
 }
 
 const saveProject = () => {
-    let project = Project.projectFactory(getProjectInput())
-    console.log(project)
-    let serialized = JSON.stringify(project)
-    localStorage.setItem('project_' + project.name, serialized)
-  }
+  let project = Project.projectFactory(getProjectInput())
+  console.log(project)
+  let serialized = JSON.stringify(project)
+  localStorage.setItem('project_' + (localStorage.length + 1), serialized)
+}
 
-  const getProjectInput = () => {
-    const name = display.projectName.value
-    return name;
-  };
+const getProjectInput = () => {
+  const name = display.projectName.value
+  return name;
+};
 
 
 const formProjectSubmit = document.querySelector(".form-submit-project")
@@ -57,4 +57,4 @@ formProjectSubmit.addEventListener("click", saveProject, false)
 const formSubmit = document.querySelector(".form-submit")
 formSubmit.addEventListener("click", saveTodo, false)
 
-Project.defaultProject.projects.push(test);
+Project.defaultProject.todos.push(test);
