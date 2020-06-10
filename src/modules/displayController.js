@@ -39,8 +39,9 @@ const display = (() => {
   }
 
   const deleteThis = (e) => {
-    let elementName = e.target.parentNode
-    console.log(elementName)
+    let index = e.target.parentNode.dataset.indexNumber
+    console.log(getCurrent())
+    console.log(JSON.parse(localStorage.default).todos[index])
   }
   
   // creates a button element with the name of the object in question as the ID
@@ -61,6 +62,7 @@ const display = (() => {
       item.innerText = project.todos[i].name;
       let deletebtn = deleteButton();
       item.appendChild(deletebtn);
+      item.setAttribute('data-index-number',i)
       display.listContainer.appendChild(item);
     }
   }
