@@ -2,6 +2,20 @@ import Storage from './localStorage'
 
 const display = (() => {
 
+  const testInput = (field, button) => {
+    if (field.value === '') {
+      button.classList.add('hidden');
+      field.classList.add('missing');
+    } else {
+      button.classList.remove('hidden');
+      field.classList.remove('missing');
+    }
+  }
+
+  const clearField = (field) => {
+    field.value = "";
+  }
+
   // Todos
   const listContainer = document.getElementById('list');
 
@@ -11,6 +25,10 @@ const display = (() => {
   const priorityField = document.getElementById('priority');
 
   const formSubmit = document.querySelector(".form-submit");
+
+  const checkTodoName = () => {
+    testInput(nameField, formSubmit);
+  }
 
   const getInput = () => {
     const name = nameField.value
@@ -26,7 +44,50 @@ const display = (() => {
     showTodos();
   }
 
+  const deleteThis = (e) => {
+    let index = parseInt((e.target.parentNode.dataset.indexNumber))
+    let parentProject = getCurrent().id
+    let parentObj = JSON.parse(localStorage[parentProject]);
+    parentObj.todos.splice(index, 1);
+    localStorage.setItem(parentProject, Storage.serialized(parentObj));
+    showTodos();
+  }
+
+  // creates a button element with the name of the object in question as the ID
+  const deleteButton = () => {
+    let button = document.createElement('button')
+    button.className = "btn btn-danger delete-todo"
+    button.innerHTML = "Delete Todo"
+    button.addEventListener("click", deleteThis, false)
+    return button
+  }
+
+  const showTodos = () => {
+    clearField(nameField);
+    let project = JSON.parse(localStorage.getItem(getCurrent().id));
+    clearTodos();
+    let item;
+    for (let i = 0; i < project.todos.length; i++) {
+      item = document.createElement('LI');
+      item.innerText = project.todos[i].name;
+      let deletebtn = deleteButton();
+      item.appendChild(deletebtn);
+      item.setAttribute('data-index-number', i)
+      display.listContainer.appendChild(item);
+    }
+  }
+
+  const clearTodos = () => {
+    listContainer.innerHTML = "";
+  }
+
+  // Project 
+  const projectName = document.querySelector("#project-name");
+  const projectsContianer = document.getElementById('projects');
+  const formProjectSubmit = document.querySelector(".form-submit-project");
+
   const showProjects = () => {
+    clearField(projectName);
     clearProjects();
     for (let i = 0; i < localStorage.length; i++) {
       if (localStorage.key(i) != "undefined") {
@@ -38,47 +99,9 @@ const display = (() => {
     }
   }
 
-  const deleteThis = (e) => {
-    let index = parseInt((e.target.parentNode.dataset.indexNumber))
-    let parentProject = getCurrent().id
-    let parentObj = JSON.parse(localStorage[parentProject]);
-    parentObj.todos.splice(index,1);
-    localStorage.setItem(parentProject,Storage.serialized(parentObj));
-    showTodos();
+  const checkProjectName = () => {
+    testInput(projectName, formProjectSubmit);
   }
-  
-  // creates a button element with the name of the object in question as the ID
-  const deleteButton = () => {
-    let button = document.createElement('button')
-    button.className = "btn btn-danger delete-todo"
-    button.innerHTML = "Delete Todo"
-    button.addEventListener("click",deleteThis,false)
-    return button
-  }
-
-  const showTodos = () => {
-    let project = JSON.parse(localStorage.getItem(display.getCurrent().id));
-    display.clearTodos();
-    let item;
-    for (let i = 0; i < project.todos.length; i++) {
-      item = document.createElement('LI');
-      item.innerText = project.todos[i].name;
-      let deletebtn = deleteButton();
-      item.appendChild(deletebtn);
-      item.setAttribute('data-index-number',i)
-      display.listContainer.appendChild(item);
-    }
-  }
-
-
-  const clearTodos = () => {
-    listContainer.innerHTML = "";
-  }
-
-  // Project 
-  const projectName = document.querySelector("#project-name");
-  const projectsContianer = document.getElementById('projects');
-  const formProjectSubmit = document.querySelector(".form-submit-project");
 
   const getCurrent = () => document.querySelector('.selected');
   const currentProject = () => JSON.parse(localStorage.getItem(display.getCurrent().id));
@@ -108,6 +131,8 @@ const display = (() => {
   const setListeners = (saveProject, updateTodos) => {
     formProjectSubmit.addEventListener("click", saveProject, false);
     formSubmit.addEventListener("click", updateTodos, false);
+    nameField.addEventListener('keyup', checkTodoName, false);
+    projectName.addEventListener('keyup', checkProjectName, false);
   }
 
   const swapSelected = (project) => {
