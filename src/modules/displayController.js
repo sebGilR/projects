@@ -15,7 +15,7 @@ const display = (() => {
   const clearField = (field) => {
     field.value = "";
   }
-
+  const bodyElement = document.querySelector('body')
   // Todos
   const listContainer = document.getElementById('list');
 
@@ -53,6 +53,22 @@ const display = (() => {
     showTodos();
   }
 
+  const createEditMenu = () => {
+    let cloneForm = document.querySelector("#form").cloneNode(true)
+    cloneForm.classList.add("formClone")
+    return cloneForm
+  }
+
+  const editTodo = (e) => {
+    updateThis(e)
+    let editform = createEditMenu()
+    bodyElement.appendChild(editform)
+  }
+
+  const updateThis = (e) =>{ 
+    console.log(e.target.parentNode)
+  }
+
   // creates a button element with the name of the object in question as the ID
   const deleteButton = () => {
     let button = document.createElement('button')
@@ -62,17 +78,32 @@ const display = (() => {
     return button
   }
 
+  const editButton = () => {
+    let button = document.createElement('button')
+    button.className = "btn btn-info update-todo"
+    button.innerHTML = "Edit"
+    button.addEventListener("click", editTodo, false)
+    return button
+  }
+
+  const createTodoLi = (todo,index) => {
+    let item = document.createElement('LI');
+    item.innerText = todo.name;
+    let deletebtn = deleteButton();
+    let editbtn = editButton();
+    item.appendChild(deletebtn);
+    item.setAttribute('data-index-number', index)
+    item.appendChild(editbtn);
+    return item
+  }
+
   const showTodos = () => {
     clearField(nameField);
     let project = JSON.parse(localStorage.getItem(getCurrent().id));
     clearTodos();
     let item;
     for (let i = 0; i < project.todos.length; i++) {
-      item = document.createElement('LI');
-      item.innerText = project.todos[i].name;
-      let deletebtn = deleteButton();
-      item.appendChild(deletebtn);
-      item.setAttribute('data-index-number', i)
+      item = createTodoLi(project.todos[i],i)
       display.listContainer.appendChild(item);
     }
   }

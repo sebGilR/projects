@@ -1,3 +1,7 @@
+$background: #064A5B;
+$uibackground:#FFF7D0;
+$selectors:#C19FF7;
+
 body {
     display: flex;
 }
@@ -21,4 +25,9 @@ aside {
 
 .missing {
     border-color: red;
+}
+
+.formClone {
+    position: absolute;
+    background-color: $background;
 }
