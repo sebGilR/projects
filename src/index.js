@@ -7,7 +7,10 @@ import Storage from './modules/localStorage'
 // Parameters for actions 
 const storeData = [Storage.saveItem, Storage.serialized]
 const displayData = [display.projectInput, display.showProjects, display.getInput, display.currentProject, display.getCurrent]
-
+// set default project
+if (localStorage.getItem('default') === null) {
+  Project.setDefault()
+}
 const updateTodos = () => {
   Todo.saveTodo(storeData, displayData, Project.addTodo)
   display.showTodos();

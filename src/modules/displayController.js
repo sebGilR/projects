@@ -19,10 +19,7 @@ const display = (() => {
     const priority = priorityField.value
     return [name, date, description, priority]
   };
-  // set default project
-  if (localStorage.getItem('default') === null) {
-    Project.setDefault()
-  }
+
   const selectProject = (e) => {
     let project = e.target;
     display.swapSelected(project);
