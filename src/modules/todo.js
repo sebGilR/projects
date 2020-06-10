@@ -1,10 +1,18 @@
-const todoFactory = (name, date, description, priority) => {
-  let checked = false;
-  let priorityVal = priority === 'default' ? 'low' : priority
-
-  return { name, date, description, priorityVal }
+const todoProto = {
+  checkedStatus = () => {
+    console.log(this.checked)
+  }
 }
 
+const todoFactory = (name, date, description, priority) => {
+  let todo = Object.create(todoProto)
+  todo.checked = 'testing';
+  todo.priorityVal = priority === 'default' ? 'low' : priority;
+  todo.description = description;
+  todo.date = date;
+  todo.name = name;
+  return todo
+}
 
 const saveTodo = (store, display, addTodo) => {
   let todo = todoFactory(...display[2]())
