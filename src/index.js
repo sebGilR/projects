@@ -9,6 +9,8 @@ if (localStorage.getItem('default') === null) {
 }
 
 // TODOS
+
+
 const saveTodo = () => {
   let todo = todoFactory(...display.getInput())
   let project = display.currentProject();
@@ -52,10 +54,9 @@ const saveProject = () => {
   showProjects();
 }
 
-const loader = () => {
+const loader = (() => {
   display.setListeners(saveProject, saveTodo);
   showProjects();
   showTodos();
-}
+})();
 
-loader();
