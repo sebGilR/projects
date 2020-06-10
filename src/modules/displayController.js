@@ -39,9 +39,12 @@ const display = (() => {
   }
 
   const deleteThis = (e) => {
-    let index = e.target.parentNode.dataset.indexNumber
-    console.log(getCurrent())
-    console.log(JSON.parse(localStorage.default).todos[index])
+    let index = parseInt((e.target.parentNode.dataset.indexNumber))
+    let parentProject = getCurrent().id
+    let parentObj = JSON.parse(localStorage[parentProject]);
+    parentObj.todos.splice(index,1);
+    localStorage.setItem(parentProject,Storage.serialized(parentObj));
+    showTodos();
   }
   
   // creates a button element with the name of the object in question as the ID
