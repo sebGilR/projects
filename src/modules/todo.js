@@ -4,10 +4,6 @@ const todoFactory = (name, date, description, priority) => {
   return { checked, priorityVal, description, date, name }
 }
 
-const checkedStatus = () => {
-  console.log('calling checked status prototype');
-}
-
 const saveTodo = (store, display, addTodo) => {
   let todo = todoFactory(...display[2]());
   let project = display[3]();
@@ -15,4 +11,4 @@ const saveTodo = (store, display, addTodo) => {
   store[0](display[4]().id, store[1](project));
 }
 
-export { todoFactory, saveTodo, checkedStatus }
+export { todoFactory, saveTodo}

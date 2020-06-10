@@ -15,6 +15,7 @@ if (localStorage.getItem('default') === null) {
 const updateTodos = () => {
   Todo.saveTodo(storeData, displayData, Project.addTodo);
   display.showTodos();
+  display.checkTodoName();
 }
 
 const updateProject = () => {

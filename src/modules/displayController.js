@@ -155,7 +155,8 @@ const display = (() => {
     setListeners,
     swapSelected,
     showProjects,
-    showTodos
+    showTodos,
+    checkTodoName
   }
 
 })()
