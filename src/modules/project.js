@@ -1,9 +1,3 @@
-
-import display from './displayController';
-import Storage from './localStorage'
-import todoFactory from './todo';
-
-
 const projectFactory = (name) => {
   const todos = [];
   return { name, todos }
@@ -17,29 +11,14 @@ const addTodo = (project, todo) => {
   project.todos.push(todo);
 }
 
-const saveProject = () => {
-  let project = projectFactory(display.projectInput());
-  Storage.saveItem('project_' + (localStorage.length + 1), Storage.serialized(project));
-  display.showProjects();
-}
-
-const updateTodos = () => {
-  saveTodo()
-  display.showTodos();
-}
-
-
-const saveTodo = () => {
-  let todo = todoFactory(...display.getInput())
-  let project = display.currentProject();
-  addTodo(project, todo);
-  Storage.saveItem(display.getCurrent().id, Storage.serialized(project));
+const saveProject = (store, display) => {
+  let project = projectFactory(display[0]());
+  store[0]('project_' + (localStorage.length + 1), store[1](project));
 }
 
 export {
   projectFactory,
   setDefault,
   addTodo,
-  saveProject,
-  updateTodos
+  saveProject
 }
