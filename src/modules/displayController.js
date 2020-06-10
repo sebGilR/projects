@@ -1,3 +1,4 @@
+import Storage from './localStorage'
 
 const display = (() => {
 
@@ -18,7 +19,38 @@ const display = (() => {
     const priority = priorityField.value
     return [name, date, description, priority]
   };
+  // set default project
+  if (localStorage.getItem('default') === null) {
+    Project.setDefault()
+  }
+  const selectProject = (e) => {
+    let project = e.target;
+    display.swapSelected(project);
+    showTodos();
+  }
 
+  const showProjects = () => {
+    clearProjects();
+    for (let i = 0; i < localStorage.length; i++) {
+      if (localStorage.key(i) != "undefined") {
+        const current = Storage.getItem(localStorage.key(i))
+        const item = document.createElement('LI');
+        const key = localStorage.key(i)
+        buildProjects(current, item, key, selectProject);
+      }
+    }
+  }
+
+  const showTodos = () => {
+    let project = JSON.parse(localStorage.getItem(display.getCurrent().id));
+    display.clearTodos();
+    let item;
+    for (let i = 0; i < project.todos.length; i++) {
+      item = document.createElement('LI');
+      item.innerText = project.todos[i].name;
+      display.listContainer.appendChild(item);
+    }
+  }
 
 
   const clearTodos = () => {
@@ -55,9 +87,9 @@ const display = (() => {
 
   const projectInput = () => projectName.value;
 
-  const setListeners = (saveProject, saveTodo) => {
+  const setListeners = (saveProject, updateTodos) => {
     formProjectSubmit.addEventListener("click", saveProject, false);
-    formSubmit.addEventListener("click", saveTodo, false);
+    formSubmit.addEventListener("click", updateTodos, false);
   }
 
   const swapSelected = (project) => {
@@ -78,7 +110,9 @@ const display = (() => {
     buildProjects,
     projectInput,
     setListeners,
-    swapSelected
+    swapSelected,
+    showProjects,
+    showTodos
   }
 
 })()
