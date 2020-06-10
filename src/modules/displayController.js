@@ -38,6 +38,20 @@ const display = (() => {
     }
   }
 
+  const deleteThis = (e) => {
+    let elementName = e.target.parentNode
+    console.log(elementName)
+  }
+  
+  // creates a button element with the name of the object in question as the ID
+  const deleteButton = () => {
+    let button = document.createElement('button')
+    button.className = "btn btn-danger delete-todo"
+    button.innerHTML = "Delete Todo"
+    button.addEventListener("click",deleteThis,false)
+    return button
+  }
+
   const showTodos = () => {
     let project = JSON.parse(localStorage.getItem(display.getCurrent().id));
     display.clearTodos();
@@ -45,6 +59,8 @@ const display = (() => {
     for (let i = 0; i < project.todos.length; i++) {
       item = document.createElement('LI');
       item.innerText = project.todos[i].name;
+      let deletebtn = deleteButton();
+      item.appendChild(deletebtn);
       display.listContainer.appendChild(item);
     }
   }
@@ -70,8 +86,8 @@ const display = (() => {
     display.projectsContianer.childNodes.forEach(item => item.classList.remove('selected'));
   }
 
-  const addSelected = (project) => {
-    project.classList.add('selected');
+  const addSelected = (element) => {
+    element.classList.add('selected');
   }
 
   const buildProjects = (project, item, key, clickEvent) => {

@@ -1,17 +1,11 @@
-const todoProto = {
-  checkedStatus = () => {
-    console.log(this.checked)
-  }
+const todoFactory = (name, date, description, priority) => {
+  let checked = 'testing';
+  let priorityVal = priority === 'default' ? 'low' : priority;
+  return {checked, priorityVal, description, date, name}
 }
 
-const todoFactory = (name, date, description, priority) => {
-  let todo = Object.create(todoProto)
-  todo.checked = 'testing';
-  todo.priorityVal = priority === 'default' ? 'low' : priority;
-  todo.description = description;
-  todo.date = date;
-  todo.name = name;
-  return todo
+const checkedStatus = () => {
+  console.log('calling checked status prototype')
 }
 
 const saveTodo = (store, display, addTodo) => {
@@ -21,4 +15,4 @@ const saveTodo = (store, display, addTodo) => {
   store[0](display[4]().id, store[1](project));
 }
 
-export { todoFactory, saveTodo }
+export { todoFactory, saveTodo, checkedStatus }
