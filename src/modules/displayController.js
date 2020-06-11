@@ -1,7 +1,7 @@
 import Storage from './localStorage'
 
 const display = (() => {
-// todoInfoObj being used for editing todos
+  // todoInfoObj being used for editing todos
   var todoInfoObj;
 
   const testInput = (field, button) => {
@@ -45,7 +45,7 @@ const display = (() => {
     const name = form.querySelector('#name').value
     const date = form.querySelector('#date').value
     const description = form.querySelector('#description').value
-    return {name, date, description}
+    return { name, date, description }
   }
 
   const selectProject = (e) => {
@@ -75,8 +75,8 @@ const display = (() => {
     cloneForm.querySelector("#description").value = todo.description
     let button = document.createElement('button')
     button.innerHTML = 'Save'
-    button.className ='btn btn-success'
-    button.addEventListener('click',saveAndUpdate,false);
+    button.className = 'btn btn-success'
+    button.addEventListener('click', saveAndUpdate, false);
     cloneForm.appendChild(button)
     return cloneForm
   }
@@ -86,7 +86,7 @@ const display = (() => {
     let parentName = getCurrent().id
     let parentObj = JSON.parse(localStorage[parentName]);
     let todo = parentObj.todos[index]
-    return {parentObj, todo, index, parentName}
+    return { parentObj, todo, index, parentName }
   }
 
   const saveAndUpdate = (event) => {
@@ -104,17 +104,13 @@ const display = (() => {
     localStorage.setItem(todoInfoObj.parentName, Storage.serialized(todoInfoObj.parentObj))
     showTodos();
   }
-  
+
   const editTodo = (event) => {
     // returns a formmated obj from the localStorage using target event
     todoInfoObj = getStorageObj(event)
     // create an edit menu with target event Todo information
     let editFormDiv = createEditMenu(todoInfoObj.todo)
     bodyElement.appendChild(editFormDiv)
-  }
-
-  const updateThis = (event) =>{ 
-    let todoIndex = (event.target.parentNode.dataset.indexNumber)
   }
 
   // creates a button element with the name of the object in question as the ID
@@ -129,19 +125,25 @@ const display = (() => {
   const editButton = () => {
     let button = document.createElement('button')
     button.className = "btn btn-info update-todo"
-    button.innerHTML = "Edit"
+    button.innerHTML = "View"
     button.addEventListener("click", editTodo, false)
     return button
   }
 
-  const createTodoLi = (todo,index) => {
+  const checkDate = (todo) => {
+    return todo.date ? todo.date : 'No deadline';
+  }
+
+  const createTodoLi = (todo, index) => {
     let item = document.createElement('LI');
-    item.innerText = todo.name;
+    item.innerText = todo.name + ' - ' + checkDate(todo);
+    let btnsDiv = document.createElement('DIV');
+    btnsDiv.setAttribute('class', 'btnsDiv');
     let deletebtn = deleteButton();
     let editbtn = editButton();
-    item.appendChild(deletebtn);
+    btnsDiv.append(deletebtn, editbtn)
+    item.appendChild(btnsDiv);
     item.setAttribute('data-index-number', index)
-    item.appendChild(editbtn);
     return item
   }
 
@@ -151,7 +153,7 @@ const display = (() => {
     clearTodos();
     let item;
     for (let i = 0; i < project.todos.length; i++) {
-      item = createTodoLi(project.todos[i],i)
+      item = createTodoLi(project.todos[i], i)
       display.listContainer.appendChild(item);
     }
   }

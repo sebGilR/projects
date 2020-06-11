@@ -4,14 +4,23 @@ $selectors:#C19FF7;
 
 body {
     display: flex;
+    height: 100vh;
 }
 
 aside {
     width: 30%;
+    padding: 1em;
+    height: 100%;
+    border-right: 1px solid rgb(211, 211, 211);
+}
+
+main {
+    padding: 1em;
 }
 
 .selected {
-    border: 1px solid yellowgreen;
+    // border: 1px solid $selectors;
+    box-shadow: 0 0 7px $selectors;
 }
 
 .delete-todo {
@@ -41,4 +50,46 @@ aside {
 .btn-success {
     color: rgb(0, 0, 0);
     background-color: $uibackground !important;
+}
+
+.btn-danger {
+    background-color: $background !important;
+    border-color: $background !important;
+
+    &:hover {
+        background-color: #318fa7 !important;
+    }
+}
+
+.btn-info {
+    background-color: $uibackground !important;
+    color: $background;
+
+    &:hover {
+        background-color: $background !important;
+        color: $uibackground;
+    }
+}
+
+li {
+    list-style: none;
+    width: 100%;
+    position: relative;
+    height: 45px;
+    line-height: 45px;
+    border-bottom: 1px solid rgb(211, 211, 211);
+    padding-left: 5px;
+
+    .btnsDiv {
+        display: inline;
+        position: absolute;
+        right: 0;
+    }
+}
+
+#projects {
+    li {
+        
+        line-height: 45px;
+    }
 }
