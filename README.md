@@ -3,6 +3,7 @@
 This project is aimed at creating a TODO program that uses OOP principles and functional programming to properly organize code. This TODO program allows the user to create projects to wrap the TODO lists and assign priority to each item created.
 
 ## Screenshot
+
 ![sample](screenshot.png)
 
 ## Usage
@@ -19,6 +20,7 @@ This project is aimed at creating a TODO program that uses OOP principles and fu
 - Allow the user to edit the TODO in place without a new form popping up.
 
 ## Built With
+
 - HTML & CSS
 - Bootstrap
 - JavaScript/ES6
@@ -32,17 +34,17 @@ This project is aimed at creating a TODO program that uses OOP principles and fu
 
 ## Author
 
-👤 **Dannison Arias**
-
-- Github: [@dannisonarias](https://github.com/dannisonarias)
-- Twitter: [@AriasDannison](https://twitter.com/AriasDannison)
-- Linkedin: [Dannison Arias](https://www.linkedin.com/in/dannison-arias-777919190/)
-
 👤 **Sebastian Gil Rodriguez**
 
 - Github: [@sebGilR](https://github.com/sebGilR)
 - Twitter: [@sebGilR](https://twitter.com/sebGilR)
 - Linkedin: [sebastiangilrodriguez](https://www.linkedin.com/in/sebastiangilrodriguez)
+
+👤 **Dannison Arias**
+
+- Github: [@dannisonarias](https://github.com/dannisonarias)
+- Twitter: [@AriasDannison](https://twitter.com/AriasDannison)
+- Linkedin: [Dannison Arias](https://www.linkedin.com/in/dannison-arias-777919190/)
 
 ## 🤝 Contributing
 
