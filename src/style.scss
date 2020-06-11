@@ -75,10 +75,15 @@ li {
     list-style: none;
     width: 100%;
     position: relative;
-    height: 45px;
+    height: 50px;
     line-height: 45px;
-    border-bottom: 1px solid rgb(211, 211, 211);
-    padding-left: 5px;
+    margin: 10px 0;
+    border: 1px solid rgb(230, 230, 230);
+    box-shadow: 0 0 5px rgb(235, 235, 235);
+
+    span {
+        padding-left: 5px;
+    }
 
     .btnsDiv {
         display: inline;
@@ -89,12 +94,25 @@ li {
 
 #projects {
     li {
-        
         line-height: 45px;
+        padding-left: 5px;
     }
 }
 
 .text {
     display: inline-block;
     width: calc(100% - 200px);
+}
+
+
+.high {
+    border-left: 3px solid red;
+}
+
+.medium {
+    border-left: 3px solid yellow;
+}
+
+.low {
+    border-left: 3px solid green;
 }
