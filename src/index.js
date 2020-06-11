@@ -23,6 +23,7 @@ const updateProject = () => {
   display.showProjects();
 }
 
+
 const loader = (() => {
   display.setListeners(updateProject, updateTodos);
   display.showProjects();

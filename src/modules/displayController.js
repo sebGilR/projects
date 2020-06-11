@@ -90,9 +90,12 @@ const display = (() => {
   }
 
   const saveAndUpdate = (event) => {
-    event.target.parentNode.classList.add('hidden')
+    let node = event.target.parentNode
+    node.classList.add('hidden')
     // format the edit menu user input into an object
     let inputInfo = getEditInput()
+    // remove the clone form after getting input
+    bodyElement.removeChild(node)
     // update parentObj with edit menu inputs
     todoInfoObj.parentObj.todos[todoInfoObj.index].name = inputInfo.name
     todoInfoObj.parentObj.todos[todoInfoObj.index].date = inputInfo.date
