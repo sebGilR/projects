@@ -1,118 +1,116 @@
-$background: #064A5B;
-$uibackground:#FFF7D0;
-$selectors:#C19FF7;
+$background: #064a5b;
+$uibackground:#fff7d0;
+$selectors:#c19ff7;
 
 body {
-    display: flex;
-    height: 100vh;
+  display: flex;
+  height: 100vh;
 }
 
 aside {
-    width: 30%;
-    padding: 1em;
-    height: 100%;
-    border-right: 1px solid rgb(211, 211, 211);
+  width: 30%;
+  padding: 1em;
+  height: 100%;
+  border-right: 1px solid rgb(211, 211, 211);
 }
 
 main {
-    padding: 1em;
+  padding: 1em;
 }
 
 .selected {
-    // border: 1px solid $selectors;
-    box-shadow: 0 0 7px $selectors;
+  box-shadow: 0 0 7px $selectors;
 }
 
 .delete-todo {
-    height: fit-content;
-    margin: 5px;
+  height: fit-content;
+  margin: 5px;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 .missing {
-    border-color: red;
+  border-color: red;
 }
 
 .formClone {
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    text-align: center;
-    background-color: $background;
-    padding: 20px;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background-color: $background;
+  padding: 20px;
 }
 
 .btn-success {
-    color: rgb(0, 0, 0);
-    background-color: $uibackground !important;
+  color: rgb(0, 0, 0);
+  background-color: $uibackground !important;
 }
 
 .btn-danger {
-    background-color: $background !important;
-    border-color: $background !important;
+  background-color: $background !important;
+  border-color: $background !important;
 
-    &:hover {
-        background-color: #318fa7 !important;
-    }
+  &:hover {
+    background-color: #318fa7 !important;
+  }
 }
 
 .btn-info {
-    background-color: $uibackground !important;
-    color: $background;
+  background-color: $uibackground !important;
+  color: $background;
 
-    &:hover {
-        background-color: $background !important;
-        color: $uibackground;
-    }
+  &:hover {
+    background-color: $background !important;
+    color: $uibackground;
+  }
 }
 
 li {
-    list-style: none;
-    width: 100%;
-    position: relative;
-    height: 50px;
-    line-height: 45px;
-    margin: 10px 0;
-    border: 1px solid rgb(230, 230, 230);
-    box-shadow: 0 0 5px rgb(235, 235, 235);
+  list-style: none;
+  width: 100%;
+  position: relative;
+  height: 50px;
+  line-height: 45px;
+  margin: 10px 0;
+  border: 1px solid rgb(230, 230, 230);
+  box-shadow: 0 0 5px rgb(235, 235, 235);
 
-    span {
-        padding-left: 5px;
-    }
+  span {
+    padding-left: 5px;
+  }
 
-    .btnsDiv {
-        display: inline;
-        position: absolute;
-        right: 0;
-    }
+  .btnsDiv {
+    display: inline;
+    position: absolute;
+    right: 0;
+  }
 }
 
 #projects {
-    li {
-        line-height: 45px;
-        padding-left: 5px;
-    }
+  li {
+    line-height: 45px;
+    padding-left: 5px;
+  }
 }
 
 .text {
-    display: inline-block;
-    width: calc(100% - 200px);
+  display: inline-block;
+  width: calc(100% - 200px);
 }
 
-
 .high {
-    border-left: 3px solid red;
+  border-left: 3px solid red;
 }
 
 .medium {
-    border-left: 3px solid yellow;
+  border-left: 3px solid yellow;
 }
 
 .low {
-    border-left: 3px solid green;
+  border-left: 3px solid green;
 }
