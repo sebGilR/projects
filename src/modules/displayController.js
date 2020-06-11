@@ -136,13 +136,13 @@ const display = (() => {
 
   const createTodoLi = (todo, index) => {
     let item = document.createElement('LI');
-    item.innerText = todo.name + ' - ' + checkDate(todo);
-    let btnsDiv = document.createElement('DIV');
-    btnsDiv.setAttribute('class', 'btnsDiv');
+    item.innerHTML = `<span class="text"> ${todo.name} - ${checkDate(todo)}</span>`;
+    // let btnsDiv = document.createElement('DIV');
+    // btnsDiv.setAttribute('class', 'btnsDiv');
     let deletebtn = deleteButton();
     let editbtn = editButton();
-    btnsDiv.append(deletebtn, editbtn)
-    item.appendChild(btnsDiv);
+    // btnsDiv.append(deletebtn, editbtn)
+    item.append(deletebtn, editbtn);
     item.setAttribute('data-index-number', index)
     return item
   }

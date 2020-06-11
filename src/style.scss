@@ -93,3 +93,8 @@ li {
         line-height: 45px;
     }
 }
+
+.text {
+    display: inline-block;
+    width: calc(100% - 200px);
+}
