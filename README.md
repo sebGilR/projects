@@ -27,7 +27,8 @@ This project is aimed at creating a TODO program that uses OOP principles and fu
 - NPM
 
 ## Live Demo
-[PENDING](https://raw.githack.com/dannisonarias/Javascript_Tic_Tac_Toe/logic_and_ui/index.html)
+
+[View Live Demo](https://rawcdn.githack.com/sebGilR/projects/775ada6c9f0029616295fedff78514dc8991333f/dist/index.html)
 
 ## Author
 
