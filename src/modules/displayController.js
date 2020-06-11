@@ -1,6 +1,8 @@
 import Storage from './localStorage'
 
 const display = (() => {
+// todoInfoObj being used for editing todos
+  var todoInfoObj;
 
   const testInput = (field, button) => {
     if (field.value === '') {
@@ -38,6 +40,14 @@ const display = (() => {
     return [name, date, description, priority]
   };
 
+  const getEditInput = () => {
+    const form = document.querySelector('.formClone');
+    const name = form.querySelector('#name').value
+    const date = form.querySelector('#date').value
+    const description = form.querySelector('#description').value
+    return {name, date, description}
+  }
+
   const selectProject = (e) => {
     let project = e.target;
     display.swapSelected(project);
@@ -53,20 +63,55 @@ const display = (() => {
     showTodos();
   }
 
-  const createEditMenu = () => {
+
+  const createEditMenu = (todo) => {
     let cloneForm = document.querySelector("#form").cloneNode(true)
     cloneForm.classList.add("formClone")
+    let title = document.createElement('h1')
+    title.innerHTML = 'Edit Todo'
+    cloneForm.prepend(title)
+    cloneForm.querySelector("#name").value = todo.name
+    cloneForm.querySelector("#date").value = todo.date
+    cloneForm.querySelector("#description").value = todo.description
+    let button = document.createElement('button')
+    button.innerHTML = 'Save'
+    button.className ='btn btn-success'
+    button.addEventListener('click',saveAndUpdate,false);
+    cloneForm.appendChild(button)
     return cloneForm
   }
-
-  const editTodo = (e) => {
-    updateThis(e)
-    let editform = createEditMenu()
-    bodyElement.appendChild(editform)
+  // with target event get localstorage obj and return a formatted obj of the todos information
+  const getStorageObj = (event) => {
+    let index = parseInt((event.target.parentNode.dataset.indexNumber))
+    let parentName = getCurrent().id
+    let parentObj = JSON.parse(localStorage[parentName]);
+    let todo = parentObj.todos[index]
+    return {parentObj, todo, index, parentName}
   }
 
-  const updateThis = (e) =>{ 
-    console.log(e.target.parentNode)
+  const saveAndUpdate = (event) => {
+    event.target.parentNode.classList.add('hidden')
+    // format the edit menu user input into an object
+    let inputInfo = getEditInput()
+    // update parentObj with edit menu inputs
+    todoInfoObj.parentObj.todos[todoInfoObj.index].name = inputInfo.name
+    todoInfoObj.parentObj.todos[todoInfoObj.index].date = inputInfo.date
+    todoInfoObj.parentObj.todos[todoInfoObj.index].description = inputInfo.description
+    // <-->
+    localStorage.setItem(todoInfoObj.parentName, Storage.serialized(todoInfoObj.parentObj))
+    showTodos();
+  }
+  
+  const editTodo = (event) => {
+    // returns a formmated obj from the localStorage using target event
+    todoInfoObj = getStorageObj(event)
+    // create an edit menu with target event Todo information
+    let editFormDiv = createEditMenu(todoInfoObj.todo)
+    bodyElement.appendChild(editFormDiv)
+  }
+
+  const updateThis = (event) =>{ 
+    let todoIndex = (event.target.parentNode.dataset.indexNumber)
   }
 
   // creates a button element with the name of the object in question as the ID
