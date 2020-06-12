@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyTodo</title>
+  <!-- Bootstrap and fontawesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+    integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+  <aside>
+    <h1>EasyTodo</h1>
+    <h2>Projects</h2>
+    <div id="form-project">
+      <input type="text" name="name" id="project-name" placeholder="Name">
+      <button class="form-submit-project hidden" type="submit"><i class="fas fa-plus-circle"></i></button>
+    </div>
+    <ul id="projects">
+    </ul>
+  </aside>
+  <main>
+
+    <h2>TODOs</h2>
+    <div id="form">
+      <input type="text" name="name" id="name" placeholder="Name">
+      <input type="date" name="date" id="date" min="2020-06-02">
+      <input type="textarea" name="description" id="description" placeholder="Description">
+      <select name="priority" id="priority">
+        <option value="default" disabled="true" selected>Priority</option>
+        <option value="low" id="low">Low</option>
+        <option value="medium" id="medium">Medium</option>
+        <option value="high" id="high">High</option>
+      </select>
+      <button class="form-submit hidden" type="submit"><i class="fas fa-plus-circle"></i></button>
+    </div>
+    <div id="list">
+      <div class="todo">
+
+      </div>
+    </div>
+  </main>
+  <script src="main.js"></script>
+</body>
+
+</html>
